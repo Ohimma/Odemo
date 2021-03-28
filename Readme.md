@@ -52,14 +52,16 @@ $ mysql
 ```
 $ cd gin
 
+
 测试环境：
 $ ENV="dev" && go run main.go
 生产环境：
 $ ENV="prod" && go run main.go
 
 打二进制包：
-$ go build -o gin_linux
-$ ENV="prod" && ./gin_linux
+$ CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -o odemo
+$ ENV="prod" && ./odemo
+
 ```
 
 #### 2. 前端

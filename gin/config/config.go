@@ -2,6 +2,7 @@ package config
 
 import (
 	"log"
+	"os"
 
 	"github.com/spf13/viper"
 )
@@ -55,10 +56,14 @@ func init() {
 	} else {
 		viper.SetConfigName("config_dev")
 	}
-	viper.AddConfigPath("./")
+	dir, err := os.Getwd()
+	if err != nil {
+		log.Println(err)
+	}
+	viper.AddConfigPath(dir)
 	viper.SetConfigType("yaml")
 
-	err := viper.ReadInConfig()
+	err = viper.ReadInConfig()
 	if err != nil {
 		log.Print("读取config配置错误", err)
 	}
