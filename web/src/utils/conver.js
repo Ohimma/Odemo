@@ -33,7 +33,6 @@ Conver.convTotree = function (list, id) {
 
 // 去重操作
 Conver.unique = (arr) => { 
-  console.log("entry unique")
   const res = new Map()
   let temp = (arr) => !res.has(arr.index) && res.set(arr.index, 1)
   return arr.filter(temp)

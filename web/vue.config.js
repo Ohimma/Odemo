@@ -33,7 +33,11 @@ module.exports = {
   },
   configureWebpack: (config) => {    
   if (process.env.NODE_ENV === 'production') {      
-      config.mode = 'production'
+      config.mode = 'production';
+      config["performance"] = {//打包文件大小配置
+        "maxEntrypointSize": 10000000,
+        "maxAssetSize": 30000000
+      }
     } else {      
       config.mode = 'development'
     }
@@ -60,8 +64,7 @@ module.exports = {
     https: false,
     proxy: {      
       '/api': {
-        // target: 'http://ultraspace-dev.acskey.co',
-        target: 'http://127.0.0.1:8081',
+        target: process.env.VUE_APP_BASEURL,
         ws: true,
         changeOrigin: true,
         pathRewrite: {          

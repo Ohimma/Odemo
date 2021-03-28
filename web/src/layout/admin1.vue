@@ -96,7 +96,7 @@
 
 <script>  
 
-import {mapState, mapMutations} from 'vuex'
+import {mapState} from 'vuex'
 
 export default {
 
@@ -117,12 +117,12 @@ export default {
     console.log("entrey admin mounted .......")
     console.log("leavel admin mounted .......")
   },
-  watch: {
-    $route() {
-      console.log("enter admin watch ....", this.$route)
-    },
+  // watch: {
+  //   $route() {
+  //     console.log("enter admin watch ....", this.$route)
+  //   },
     
-  },
+  // },
   
   computed: {
       ...mapState({
@@ -159,19 +159,21 @@ export default {
     },
 
     setAuthList(){
-      console.log("entry admin getAuthList .... ")
       this.$http.get('http://localhost:8080/api/user/auth')
         .then((res) => {
           this.$store.dispatch('layout/AUTH_LIST_ACTION', res.data.result.list)
           this.$store.dispatch('layout/AUTH_LIST_TREE_ACTION', this.$Conver.convTotree(res.data.result.list, 0))
         })
         .catch((err) => {
-          console.log(err, 'err')
+          this.$message({
+              type: "error",
+              message: err,
+            })
+
         })
     },
 
     setUserAuth(){
-      console.log("entry admin getAuthList .... ")
       let params = {
         role_ids: this.user_role_ids,
       }
@@ -180,7 +182,10 @@ export default {
           this.$store.dispatch('layout/USER_AUTHS_ACTION', res.data.result.user_auths)
         })
         .catch((err) => {
-          console.log(err, 'err')
+          this.$message({
+              type: "error",
+              message: err,
+            })
         })
     },
     
@@ -191,7 +196,6 @@ export default {
           this.closeAll()
           break
         case 'logout':
-          console.log("handleTags logout")
           this.$store.dispatch('layout/USER_LOGOUT_ACTION')
           this.$router.push({path: '/login'})
           break

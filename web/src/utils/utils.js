@@ -11,7 +11,6 @@ const Utils = {}
  * @return 返回加密后字符串
  */
 Utils.encrypt = function (word, keyStr) {
-    console.log("word, keyStr = ", word, keyStr)
     // let pubKey = keyStr
     let encryptStr = new JSEncrypt()
     encryptStr.setPublicKey(keyStr)    // 设置 keyStr 公钥

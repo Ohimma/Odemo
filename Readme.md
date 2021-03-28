@@ -53,14 +53,35 @@ $ mysql
 $ cd gin
 
 
-测试环境：
-$ ENV="dev" && go run main.go
-生产环境：
-$ ENV="prod" && go run main.go
+1. 根据环境配置文件
+vim config_dev.yaml
+vim config_prod.yaml
 
-打二进制包：
+2. 测试环境直接启动
+$ ENV="dev" && go run main.go
+
+
+3. 正式环境打包启动
+打二进制包拷贝到服务器：
 $ CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -o odemo
-$ ENV="prod" && ./odemo
+
+$ cat /etc/supervisord.d/odemo.conf
+[program:odemo]
+directory=/data/www/odemo
+command=/data/www/odemo/gin/odemo
+environment=ENV=prod,Key2=value2
+autostart = true
+startsecs = 3
+autorestart = true
+startretries = 2
+user = root
+redirect_stderr = true
+stopasgroup = true
+killasgroup = true
+stdout_logfile = /data/www/odemo/log_odemo
+loglevel=info
+
+$ systemctl restart supervisord
 
 ```
 
@@ -70,7 +91,12 @@ $ ENV="prod" && ./odemo
 $ cd web
 
 $ npm install
+
+1. 测试环境直接启动
 $ npm run serve
+
+2. 正式环境打包部署，把包部署到线上服务器
+$ npm run build:prod
 
 会自己用浏览器打开 localhost:8080
 ```

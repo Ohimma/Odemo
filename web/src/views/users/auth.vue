@@ -156,7 +156,6 @@ import {mapState} from 'vuex'
     methods: {
         getList(){
             this.loading = true
-            console.log("entry auth methods getList", this.loading)
             this.$http.get('http://localhost:8080/api/user/auth')
                 .then((res) => {
                 this.$store.dispatch('layout/AUTH_LIST_ACTION', res.data.result.list)
@@ -168,11 +167,13 @@ import {mapState} from 'vuex'
                 this.loading = false
                 })
                 .catch((err) => {
-                this.loading = false
-                console.log(err, 'err')
+                    this.$message({
+                        type: 'error',
+                        message: err
+                    })
+                    this.loading = false
                 })
             this.loading = false
-            console.log("entry auth methods getRoleList", this.loading)
         },
       
         filterNode(value, data) {
@@ -185,7 +186,6 @@ import {mapState} from 'vuex'
             this.metaForm.tableInfo = row
         },
         handle2(type, data){
-            console.log("entry role handle2 = ", type);
             if (type == "add") {
                 this.metaForm.tableInfo = data
                 this.metaForm.visible = true
@@ -223,14 +223,18 @@ import {mapState} from 'vuex'
                 name: row.name,
             }
             this.$http.delete('http://localhost:8080/api/user/auth', params)
-            .then((res) => {
+            .then(() => {
                 this.$message({
                     type: 'sucess',
                     message: row.id + ' 删除成功' ,
                 })
                 this.getList()
-            }).catch((err) => {
-                console.log(err, 'err')
+            })
+            .catch((err) => {
+                this.$message({
+                    type: 'error',
+                    message: err
+                })
             })
         },
 

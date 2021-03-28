@@ -31,18 +31,18 @@ axios.interceptors.request.use(
         // 即使本地存在token，也有可能token是过期的，所以在响应拦截器中要对返回状态进行判断
         // const token = store.state.token;        
         // token && (config.headers.Authorization = token);        
-        console.log("进入请求拦截器 request =", config)
+        // console.log("进入请求拦截器 request =", config)
         return config;    
     },    
     error => {   
-        console.log("进入请求拦截器 err.request =", config)     
+        // console.log("进入请求拦截器 err.request =", config)     
         return Promise.error(error);    
     })
 
 // 响应拦截器
 axios.interceptors.response.use(   
     response => {    
-        console.log("进入响应拦截器 response =", response)     
+        // console.log("进入响应拦截器 response =", response)     
         if (response.status === 200) {            
             return Promise.resolve(response);        
         } else {            
@@ -51,7 +51,7 @@ axios.interceptors.response.use(
     },
     // 服务器状态码不是200的情况    
     error => {    
-        console.log("进入响应拦截器 error.response = ", error.response)    
+        // console.log("进入响应拦截器 error.response = ", error.response)    
         if (error.response.status) {            
             switch (error.response.status) {                
                 case 401:                    
@@ -139,21 +139,17 @@ http.post = function (url, obj, needToken = true) {
         axios(config)
             .then(response => {
                 // 判断id或者token是否存在，不存在则报错
-                console.log("http post" ,response.status, response.data.code)
                 if (response.status == 200 || response.data.code == 200) {
-                    console.log("http post 2" , response.status, response.data.code)
                     resolve(response)
                     this.$message({
                         message: 'post 请求创建成功',
                         type: 'success'
                     });
                 } else {
-                    console.log("http post 2", response.status, response.data.code)
                     reject(response)
                 }
             })
             .catch(e => {
-                console.log("http post" ,e)
                 reject(e)
             })
     })
@@ -218,7 +214,6 @@ http.delete = function (url, params, needToken = true) {
     return new Promise((resolve, reject) => {
         axios(config)
         .then(response => {
-            console.log('http delete 删除请求:', response)
             if (response.data.code === 200 || response.status === 200 ) {
                 resolve(response)
                 this.$message({

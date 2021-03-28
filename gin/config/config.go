@@ -50,7 +50,7 @@ func init() {
 	viper.BindEnv("ENV")
 	env := viper.Get("ENV")
 
-	log.Print("env = ", env)
+	log.Print("ENV = ", env)
 	if env == "prod" {
 		viper.SetConfigName("config_prod")
 	} else {

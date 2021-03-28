@@ -260,14 +260,18 @@ export default {
                 name: row.name,
             }
             this.$http.delete('http://localhost:8080/api/user/user', params)
-            .then((res) => {
+            .then(() => {
                 this.$message({
                     type: 'sucess',
                     message: row.id + ' 删除成功' ,
                 })
                 this.getList()
-            }).catch((err) => {
-                console.log(err, 'err')
+            })
+            .catch((err) => {
+                this.$message({
+                    type: 'error',
+                    message: err,
+                })
             })
         },
         closeDialog(action) {

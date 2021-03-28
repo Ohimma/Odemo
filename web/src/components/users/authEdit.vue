@@ -83,7 +83,7 @@ export default {
 
     methods: {
       tableCoverForm(){
-        console.log("entry roleForm mount tableCoverForm = ", this.metaForm.title)
+        // console.log("entry roleForm mount tableCoverForm = ", this.metaForm.title)
         if (this.metaForm.title == "编辑") { 
             this.formData.id = this.metaForm.tableInfo.id
             this.formData.pid = this.metaForm.tableInfo.pid
@@ -104,7 +104,6 @@ export default {
           if (data) {
               // 对表单参数进行过滤和处理
               // 组装参数发送post请求
-              console.log("xxxxxx", this.formData)
               if (this.metaForm.title == "编辑") {
                 this.editHttp(this.formData)
               } else {
@@ -115,9 +114,8 @@ export default {
       },
 
       addHttp(params){
-        console.log("entry user methods addHttp", params)
         this.$http.post('http://localhost:8080/api/user/auth', params)
-            .then((res) => {
+            .then(() => {
                 this.$message({
                   type: "sucess",
                   message: "添加成功",
@@ -125,7 +123,6 @@ export default {
                 this.closeSubmit('save')
             })
             .catch((err) => {
-                console.log(err, 'err')
                 this.$message({
                   type: "error",
                   message: err,
@@ -134,9 +131,8 @@ export default {
             })
       },
       editHttp(params){
-        console.log("entry user methods editHttp", params)
         this.$http.put('http://localhost:8080/api/user/auth', params)
-            .then((res) => {
+            .then(() => {
                 this.$message({
                   type: "sucess",
                   message: "编辑程功",
@@ -144,7 +140,6 @@ export default {
                 this.closeSubmit('save')
             })
             .catch((err) => {
-                console.log(err, 'err')
                 this.$message({
                   type: "error",
                   message: err,

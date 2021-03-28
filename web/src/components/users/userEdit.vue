@@ -72,7 +72,6 @@ export default {
 
     methods: {
       tableCoverForm(){
-        console.log("entry roleForm mount tableCoverForm = ", this.metaForm.title)
         if (this.metaForm.tableInfo.id) { 
             this.formData.id = this.metaForm.tableInfo.id
             this.formData.name = this.metaForm.tableInfo.name
@@ -91,13 +90,11 @@ export default {
         this.getRoleList()
       },
        getRoleList () {  // 获取全部 acl 列表
-        console.log("entry roleForm methods getRoleList")
         this.$http.get('http://localhost:8080/api/user/role',)
           .then((res) => {
               this.roleIds = res.data.result.list
           })
           .catch((err) => {
-            console.log(err, 'err')
                 this.$message({
                   type: "error",
                   message: err,
@@ -121,9 +118,8 @@ export default {
       },
 
       addHttp(params){
-        console.log("entry user methods addHttp", params)
         this.$http.post('http://localhost:8080/api/user/user', params)
-            .then((res) => {
+            .then(() => {
                 this.$message({
                   type: "sucess",
                   message: "添加成功",
@@ -131,7 +127,6 @@ export default {
                 this.closeSubmit('save')
             })
             .catch((err) => {
-                console.log(err, 'err')
                 this.$message({
                   type: "error",
                   message: err,
@@ -140,9 +135,8 @@ export default {
             })
       },
       editHttp(params){
-        console.log("entry user methods editHttp", params)
         this.$http.put('http://localhost:8080/api/user/user', params)
-            .then((res) => {
+            .then(() => {
                 this.$message({
                   type: "sucess",
                   message: "编辑程功",
@@ -150,7 +144,6 @@ export default {
                 this.closeSubmit('save')
             })
             .catch((err) => {
-                console.log(err, 'err')
                 this.$message({
                   type: "error",
                   message: err,

@@ -44,18 +44,17 @@ import store from '@/store/index.js'
 
 router.beforeEach((to, from, next) => {
   console.log("enter route beforeEach ......")
-  if (to.meta.requiresAuth) {
-      document.title = to.meta.title
-      console.log("document.title", document.title)
-
-      if (store.state.layout.token) {
-          next()
-      } else {
-          next({path: '/login'})
-      }
+  if (store.state.layout.token) {
+      next()
   } else {
-    next()
+      if (to.path !== '/login') {
+          next({path: '/login'})
+      } else {
+          next()
+      }
   }
+
+  document.title = to.meta.title
 })
 
 export default router

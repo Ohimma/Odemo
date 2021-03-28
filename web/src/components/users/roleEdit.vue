@@ -96,7 +96,6 @@ export default {
     methods: {
       
       tableCoverForm(){
-        console.log("entry roleForm mount tableCoverForm = ", this.metaForm.title, this.menuList)
 
         if (this.metaForm.tableInfo.id) { 
             this.formData.id = this.metaForm.tableInfo.id
@@ -132,9 +131,8 @@ export default {
       },
 
       addHttp(params){
-        console.log("entry user methods addHttp", params)
         this.$http.post('http://localhost:8080/api/user/role', params)
-            .then((res) => {
+            .then(() => {
                 this.$message({
                   type: "sucess",
                   message: "添加成功",
@@ -142,7 +140,6 @@ export default {
                 this.closeSubmit('save')
             })
             .catch((err) => {
-                console.log(err)
                 this.$message({
                   type: "error",
                   message: err,
@@ -151,9 +148,8 @@ export default {
             })
       },
       editHttp(params){
-        console.log("entry user methods editHttp", params)
         this.$http.put('http://localhost:8080/api/user/role', params)
-            .then((res) => {
+            .then(() => {
                 this.$message({
                   type: "sucess",
                   message: "编辑程功",
@@ -163,7 +159,6 @@ export default {
                 this.closeSubmit('save')
             })
             .catch((err) => {
-                console.log(err, 'err')
                 this.$message({
                   type: "error",
                   message: err,
