@@ -1,0 +1,5 @@
+bak/
+backup/
+test/
+node_modules/
+config_prod.yaml

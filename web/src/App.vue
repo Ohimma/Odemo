@@ -24,7 +24,6 @@ export default {
       else if  (from.path == "/home" && to.path == "/login" ) {
         this.transitionName = 'logout'
       } 
-      // console.log("entry app watch",this.transitionName, to, from)
     }
   }
 }

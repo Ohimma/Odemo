@@ -22,10 +22,12 @@ app.config.globalProperties.$echarts = echarts
 
 
 // 引入http
-import http from '@/assets/js/http.js'
+import http from '@/utils/http.js'
 app.config.globalProperties.$http = http
-import utils from '@/assets/js/utils.js' 
+import utils from '@/utils/utils.js' 
 app.config.globalProperties.$utils = utils
+import Conver from '@/utils/conver.js' 
+app.config.globalProperties.$Conver = Conver
 
 app.use(store)
 app.use(router)

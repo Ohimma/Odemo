@@ -1,0 +1,24 @@
+server:
+  port: 8081
+  mode: "debug" # debug test release
+  useRedis: true
+
+mysql:
+  host: "127.0.0.1:3306"
+  db: "odemo"
+  user: "odemo"
+  password: "odemo"
+  config: "charset=utf8&parseTime=True&loc=Local"
+  maxIdleConns: 10
+  maxOpenConns: 100
+  autoMigrate: true
+
+redis:
+  host: "127.0.0.1:6379"
+  password: "12345"
+  db: 0
+  cache:
+    tokenexpried: 7200 # expired time 2*60*60
+
+jwt:
+  signkey: "odemo"

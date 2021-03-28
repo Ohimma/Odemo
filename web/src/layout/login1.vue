@@ -2,7 +2,8 @@
   <div class="login">
     <div class="login-msg">
       <div class="title">
-        <img src="../assets/img/login-logo.png" alt="">
+        <!-- <img src="../assets/img/login-logo.png" alt=""> -->
+        <img src="https://gimg2.baidu.com/image_search/src=http%3A%2F%2Finews.gtimg.com%2Fnewsapp_bt%2F0%2F8851510617%2F640.jpg&refer=http%3A%2F%2Finews.gtimg.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1618458458&t=5bdab2e5e4d75abf5595723d479ca382" alt="">
         <span>管理后台</span>
       </div>
       <!-- 
@@ -14,9 +15,9 @@
         status-icon 添加校验结果反馈显示图标
       -->
       <el-form :model="loginData" :rules="loginDataRules" ref="loginForm">
-        <el-form-item prop="account">
+        <el-form-item prop="name">
           <el-input type="text" 
-            v-model="loginData.account" 
+            v-model="loginData.name" 
             prefix-icon="el-icon-user" 
             placeholder="请输入用户名"
             tabindex="1"
@@ -52,53 +53,41 @@ export default {
   data () {
     return {
       loginData: {
-        account: '',
+        name: '',
         password: ''
       },
       loginDataRules: {
-        account: {required: true, message: '请输入用户名', trigger: 'change'},
+        name: {required: true, message: '请输入用户名', trigger: 'change'},
         password: [{required: true, message: '请输入密码', trigger: 'change'}]
       },
       loading: false,
     }
   },
   created(){
-    console.log("entrey login create")
+    console.log("entrey login create ......")
   },
   mounted(){
-    console.log("entrey login mounted")
-    this.loginData.account = localStorage.getItem('userName')
+    console.log("entrey login mounted .......")
+    // this.loginData.name = localStorage.getItem('name')
   },
   methods: {
     loginBtn () {
       this.loading = true
-      // 后端要求：先拿一个rsa公钥，对传输的密码进行加密传输，公钥是一次性的
-      this.$http.get("http://localhost:8080/api/console/auth/key")
-        .then((res) => {
-          this.handleLogin(res.data.key)
-        })
-        .catch((err) => {
-          this.$message({type: 'error', message: "获取加密公钥失败"})
-          this.loading = false
-          console.log('get errr', err)
-        })
-    },
-    handleLogin: function (authKey) {
       // validate 对整个表单验证，参数为回调函数，不传入函数返回promise
       this.$refs.loginForm.validate(valid => {
         if (valid) {  // vaild 是 true/false
-          // post 传入用户名和 rsa加密后的用户密码
-          this.$http.post('http://localhost:8080/api/console/auth/login', {
-            account: this.loginData.account,
-            password: this.$utils.encrypt(this.loginData.password, authKey)
+          this.$http.post('http://localhost:8080/api/login', {
+            name: this.loginData.name,
+            password: this.loginData.password,
           }, false)
             .then((res) => {
               this.$message({
                 type: 'success',
                 message: '登陆成功'
               })
-              this.$store.dispatch('USER_TOKEN_ACTION', res.data.token)
-              this.$store.dispatch('USER_NAME_ACTION', this.loginData.account)
+              this.$store.dispatch('layout/USER_INFO_ACTION', res.data.result)
+              this.$store.dispatch('layout/USER_TOKEN_ACTION', res.data.result.token)
+              // this.$store.dispatch('layout/USER_NAME_ACTION', this.loginData.name)
               // 登陆成功后，判断是否有redirect，没有的话跳转到/home
               // decodeURIComponent对encodeURLComponent的url乱码解码，
               let redirect = decodeURIComponent(this.$route.query.redirect || '/home')
@@ -107,7 +96,7 @@ export default {
               })
               this.loading = false
             })
-            .catch((err) => {
+            .catch(() => {
               this.loading = false
               this.$message({
                 type: 'error', 
@@ -126,25 +115,31 @@ export default {
 
 <style scoped>
 .login {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
   height: 100%;
   width: 100%;
-
-  background-size: 100%;
+  /* display: flex;
+  justify-content: center;
+  align-items: center;
   overflow: hidden;
   background: #11255A url('../assets/img/login-bg.png') no-repeat center bottom;
+   */
+
+  background: #090d09 url('https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fwww.yyxt.com%2Fuploads%2Fallimg%2F160318%2F11-16031Q11350.jpg&refer=http%3A%2F%2Fwww.yyxt.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1618457703&t=6d3f1fd89769961b75784d049e106d73') 
+              no-repeat right bottom;
+  background-size: 90% 100%;
 
   transition: all 1s;
 }
+
+
 .login .login-msg {
+    position: relative;
+    top: 23%;
+    left: 10%;
     width: 400px;
     height: 400px;
     padding: 20px;
     box-sizing: border-box;
-    /* background-color: pink; */
 }
 .login .login-msg .title {
     width: 100%;
@@ -157,14 +152,14 @@ export default {
     margin-bottom: 20px;
 }
 .login .login-msg .title img {
-    width: 40px;
+    width: 70px;
     height: 40px;
 }
 .login .login-msg .title span {
   font-size: 20px;
   line-height: 50px;
   color: #FFFFFF;
-  margin: 0px 10px;
+  margin: 0px 0px;
 }
 
 .el-button {

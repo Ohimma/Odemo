@@ -60,11 +60,12 @@ module.exports = {
     https: false,
     proxy: {      
       '/api': {
-        target: 'http://ultraspace-dev.acskey.co',
+        // target: 'http://ultraspace-dev.acskey.co',
+        target: 'http://127.0.0.1:8081',
         ws: true,
         changeOrigin: true,
         pathRewrite: {          
-            '^/api': ''
+            '^/api': '/api'
         }
       },
       // secure: false 
