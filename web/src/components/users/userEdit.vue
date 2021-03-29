@@ -90,7 +90,7 @@ export default {
         this.getRoleList()
       },
        getRoleList () {  // 获取全部 acl 列表
-        this.$http.get('http://localhost:8080/api/user/role',)
+        this.$http.get(process.env.VUE_APP_BASEURL + 'api/user/role',)
           .then((res) => {
               this.roleIds = res.data.result.list
           })
@@ -118,7 +118,7 @@ export default {
       },
 
       addHttp(params){
-        this.$http.post('http://localhost:8080/api/user/user', params)
+        this.$http.post(process.env.VUE_APP_BASEURL + 'api/user/user', params)
             .then(() => {
                 this.$message({
                   type: "sucess",
@@ -135,7 +135,7 @@ export default {
             })
       },
       editHttp(params){
-        this.$http.put('http://localhost:8080/api/user/user', params)
+        this.$http.put(process.env.VUE_APP_BASEURL + 'api/user/user', params)
             .then(() => {
                 this.$message({
                   type: "sucess",

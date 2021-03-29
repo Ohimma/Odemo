@@ -64,7 +64,7 @@ module.exports = {
     https: false,
     proxy: {      
       '/api': {
-        target: process.env.VUE_APP_BASEURL,
+        target: "http://127.0.0.1:8081",
         ws: true,
         changeOrigin: true,
         pathRewrite: {          

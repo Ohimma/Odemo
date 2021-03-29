@@ -2,7 +2,7 @@
 // 请求拦截、响应拦截、错误统一处理
 
 import axios from 'axios';
-import qs from 'qs';
+// import qs from 'qs';
 // qs.parse()是将URL解析成对象的形式
 // qs.stringify()是将对象 序列化成URL的形式，以&进行拼接
 import { ElMessage } from 'element-plus'
@@ -31,18 +31,18 @@ axios.interceptors.request.use(
         // 即使本地存在token，也有可能token是过期的，所以在响应拦截器中要对返回状态进行判断
         // const token = store.state.token;        
         // token && (config.headers.Authorization = token);        
-        // console.log("进入请求拦截器 request =", config)
+        console.log("进入请求拦截器 request =", config)
         return config;    
     },    
     error => {   
-        // console.log("进入请求拦截器 err.request =", config)     
+        console.log("进入请求拦截器 err.request =", config)     
         return Promise.error(error);    
     })
 
 // 响应拦截器
 axios.interceptors.response.use(   
     response => {    
-        // console.log("进入响应拦截器 response =", response)     
+        console.log("进入响应拦截器 response =", response)     
         if (response.status === 200) {            
             return Promise.resolve(response);        
         } else {            
@@ -51,7 +51,7 @@ axios.interceptors.response.use(
     },
     // 服务器状态码不是200的情况    
     error => {    
-        // console.log("进入响应拦截器 error.response = ", error.response)    
+        console.log("进入响应拦截器 error.response = ", error.response)    
         if (error.response.status) {            
             switch (error.response.status) {                
                 case 401:                    

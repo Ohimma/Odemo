@@ -76,7 +76,7 @@ export default {
       // validate 对整个表单验证，参数为回调函数，不传入函数返回promise
       this.$refs.loginForm.validate(valid => {
         if (valid) {  // vaild 是 true/false
-          this.$http.post('http://localhost:8080/api/login', {
+          this.$http.post(process.env.VUE_APP_BASEURL + 'api/login', {
             name: this.loginData.name,
             password: this.loginData.password,
           }, false)

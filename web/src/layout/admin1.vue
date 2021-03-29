@@ -159,7 +159,7 @@ export default {
     },
 
     setAuthList(){
-      this.$http.get('http://localhost:8080/api/user/auth')
+      this.$http.get(process.env.VUE_APP_BASEURL + 'api/user/auth')
         .then((res) => {
           this.$store.dispatch('layout/AUTH_LIST_ACTION', res.data.result.list)
           this.$store.dispatch('layout/AUTH_LIST_TREE_ACTION', this.$Conver.convTotree(res.data.result.list, 0))
@@ -177,7 +177,7 @@ export default {
       let params = {
         role_ids: this.user_role_ids,
       }
-      this.$http.get('http://localhost:8080/api/user/role', params)
+      this.$http.get(process.env.VUE_APP_BASEURL + 'api/user/role', params)
         .then((res) => {
           this.$store.dispatch('layout/USER_AUTHS_ACTION', res.data.result.user_auths)
         })

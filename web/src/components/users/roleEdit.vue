@@ -131,7 +131,7 @@ export default {
       },
 
       addHttp(params){
-        this.$http.post('http://localhost:8080/api/user/role', params)
+        this.$http.post(process.env.VUE_APP_BASEURL + 'api/user/role', params)
             .then(() => {
                 this.$message({
                   type: "sucess",
@@ -148,7 +148,7 @@ export default {
             })
       },
       editHttp(params){
-        this.$http.put('http://localhost:8080/api/user/role', params)
+        this.$http.put(process.env.VUE_APP_BASEURL + 'api/user/role', params)
             .then(() => {
                 this.$message({
                   type: "sucess",

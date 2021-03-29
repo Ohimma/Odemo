@@ -242,7 +242,7 @@ export default {
                 order_by: this.queryParams.order_by,
                 order_type: this.queryParams.order_type,
             }
-            this.$http.get('http://localhost:8080/api/user/user', params)
+            this.$http.get(process.env.VUE_APP_BASEURL + 'api/user/user', params)
             .then((res) => {
               this.tableData.data = res.data.result.list
               this.tableData.total =  res.data.result.total
@@ -259,7 +259,7 @@ export default {
                 id: row.id,
                 name: row.name,
             }
-            this.$http.delete('http://localhost:8080/api/user/user', params)
+            this.$http.delete(process.env.VUE_APP_BASEURL + 'api/user/user', params)
             .then(() => {
                 this.$message({
                     type: 'sucess',

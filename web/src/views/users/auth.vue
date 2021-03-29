@@ -156,7 +156,7 @@ import {mapState} from 'vuex'
     methods: {
         getList(){
             this.loading = true
-            this.$http.get('http://localhost:8080/api/user/auth')
+            this.$http.get(process.env.VUE_APP_BASEURL +  'api/user/auth')
                 .then((res) => {
                 this.$store.dispatch('layout/AUTH_LIST_ACTION', res.data.result.list)
                 this.$store.dispatch('layout/AUTH_LIST_TREE_ACTION', this.$Conver.convTotree(res.data.result.list, 0))
@@ -222,7 +222,7 @@ import {mapState} from 'vuex'
                 id: row.id,
                 name: row.name,
             }
-            this.$http.delete('http://localhost:8080/api/user/auth', params)
+            this.$http.delete(process.env.VUE_APP_BASEURL + 'api/user/auth', params)
             .then(() => {
                 this.$message({
                     type: 'sucess',
