@@ -225,7 +225,8 @@ export default {
   background-color: #1d1e23;
   transition: all 0.5s;
 }
-.left-hide {
+
+.layout .left-hide {
   width: 70px;
   transition: all 1s;
 }
@@ -239,7 +240,7 @@ export default {
 }
 .left-hide .logo {
   padding: 30% 0;
-  height: 6%;
+  height: 8%;
 }
 
 .left .logo span{
