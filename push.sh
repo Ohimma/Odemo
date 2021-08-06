@@ -9,5 +9,6 @@ else
    echo "git commit -m \"$mes\""
    git add --all .
    git commit -m "$mes"
-   git push
+   git push github master
+   git push gitee  master
 fi

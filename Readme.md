@@ -33,6 +33,8 @@ demo: <http://odemo.ohimma.cn>
 ### 二：项目启动
 
 git clone https://github.com/Ohimma/Odemo.git
+git remote add github git@github.com:Ohimma/Odemo.git
+git remote add gitee  git@gitee.com:ohimma/odemo.git
 
 ##### 1. 后端
 
