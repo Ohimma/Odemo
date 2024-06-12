@@ -64,7 +64,7 @@ export default {
     }
   },
   created(){
-    console.log("entrey login create ......", process.env.VUE_APP_BASEURL)
+    console.log("entrey login create ......")
   },
   mounted(){
     console.log("entrey login mounted .......")

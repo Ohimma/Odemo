@@ -10,32 +10,58 @@
 | v2.0.0 | 2021.03.27 | 升级实现用户/角色/权限关联认证    |
 | v2.0.1 | 2021.03.28 | 修复 web 端环境变量配置           |
 
-#### 1. 项目说明
-
 ```
 前端：
 vue3 + vuex4 + vue-router4 + elemet-plus1
 
 后端：
 gin + gorm + jwt-go + logrus + viper
+
+内容：
+1. 权限管理
+2. 菜单树配置
 ```
 
-demo: <http://odemo.ohimma.cn>
-账号一(拥有所有权限)：admin/1234  
-账号二(拥有部分权限)：view/view23
 
-![](./images/page_login.png)
-![](./images/page_role.png)
-![](./images/page_role_edit.png)
-![](./images/page_user_add.png)
-![](./images/page_auth.png)
+
 
 ### 二：项目启动
+demo: <http://odemo.ohimma.cn>             
+账号一(拥有所有权限)：admin/1234          
+账号二(拥有部分权限)：view/view23
 
+```
 git clone https://github.com/Ohimma/Odemo.git
 git remote add github git@github.com:Ohimma/Odemo.git
 git remote add gitee  git@gitee.com:ohimma/odemo.git
 
+
+$ npm init vite <project-name> -- --template vue
+$ cd <project-name>
+$ npm install
+$ npm run dev
+
+$ go get -u github.com/gin-gonic/gin
+$ cd gin
+$ go mod init odemo
+$ go get github.com/gin-gonic/gin
+$ vim example.go
+package main
+
+import "github.com/gin-gonic/gin"
+
+func main() {
+	r := gin.Default()
+	r.GET("/ping", func(c *gin.Context) {
+		c.JSON(200, gin.H{
+			"message": "pong",
+		})
+	})
+	r.Run() // 监听并在 0.0.0.0:8080 上启动服务
+}
+$ curl 127.0.0.1:8080/ping
+{"message":"pong"}% 
+```
 ##### 1. 后端
 
 初始化数据库
@@ -202,3 +228,10 @@ gin
 ```
 
 ### 四：其他
+
+
+![](./images/page_login.png)
+![](./images/page_role.png)
+![](./images/page_role_edit.png)
+![](./images/page_user_add.png)
+![](./images/page_auth.png)

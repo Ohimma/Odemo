@@ -331,6 +331,7 @@ export default {
 <style >
 
 
+
 .left .el-menu {
   background-color: transparent;
   border: none;
@@ -375,3 +376,13 @@ export default {
   right: 20px;
 }
 </style>
+
+
+
+
+
+
+
+
+
+
