@@ -12,6 +12,6 @@ else
    echo "\033[1;34mgit commit -m $mes \033[0m"
    git add --all .
    git commit -m "$mes"
-   git push github main
-   git push gitee  main
+   git push github master
+   git push gitee  master
 fi
